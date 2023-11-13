@@ -18,6 +18,12 @@ server.engine('mustache',mustache())
 //conexao com a pasta public (parte front end)
 server.use(express.static(path.join(__dirname, '../public')))     // para importar e referenciar imagem usar '..'
 
+//configurando o POST
+server.use(express.urlencoded({extended:true}))
+
+
+
+
 server.use(mainRoutes)
 
 //criando a pagina nao encontrada, normalmente e criado no server por ser uma pagina especifica

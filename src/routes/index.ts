@@ -27,7 +27,7 @@ router.get("/",(req:Request,res:Response) =>{
         showWelcome: true    // variavel boleana
     })*/
 
-    res.render('home',{
+    res.render('pages/home',{
         name:'Joao',
         lastname:'Silva',
         mostrarIdade,
@@ -37,6 +37,11 @@ router.get("/",(req:Request,res:Response) =>{
             {titulo: 'produto Z', preco: 200}
             
         
+        ],
+        frases: [
+            'frase do dia 1',
+            'frase do dia 2',
+            'frase do dia 3'
         ]
     })
                 
@@ -46,15 +51,80 @@ router.get("/",(req:Request,res:Response) =>{
 
 
 router.get('/contato',(req:Request,res:Response) =>{
-    res.render('contato')
+    res.render('pages/contato')
 })
 
 // toda vez que usar render tem que identificar o arquivo com ''
 // ex: render('contato')  se usar send (vai aparecer o que esta escrito dentro do parenteses)
 
 router.get('/sobre',(req:Request,res:Response) =>{ 
-    res.render('sobre')
+    res.render('pages/sobre')
 })
+
+router.get('/nome',(req:Request,res:Response) =>{ 
+
+    let nome: string = req.query.nome as string
+        // no typescript precisa informar que a resultante e do tipo que voce quer
+    // pode utilizar tambem let nome: string = String(req.params)
+
+
+    res.render('pages/nome',{
+        nome
+    })
+
+})
+
+router.get('/informacoes',(req:Request,res:Response) =>{ 
+
+    let nome: string = req.query.nome as string
+    let idade: number = parseInt(req.query.idade as string)
+    let telefone: number = parseInt(req.query.idade as string)
+    let endereco: string = req.query.nome as string
+    
+    res.render('pages/informacoes',{
+        nome, idade, telefone, endereco
+    })
+
+})
+
+router.get('/idade',(req:Request,res:Response) =>{
+    res.render('pages/idade')
+})
+
+router.post('/idade',(req:Request,res:Response) =>{ 
+
+    let idade: number = 2023 - parseInt(req.body.idade as string)
+
+
+    // outro jeito de fazer
+    /*
+        let mostrarIdade: boolean = false
+        let date: number = (new date()).getfullyear
+        let idade: number = date - parseInt(req.query.idade as string)
+    */
+
+    res.render('pages/idade',{
+        idade 
+    })
+
+})
+
+router.get('/login ',(req:Request,res:Response) =>{
+    res.render('pages/login')
+})
+
+router.post('/login',(req:Request,res:Response) =>{ 
+
+    let email: string = req.query.nome as string
+    let senha: string = req.query.nome as string
+
+
+    res.render('pages/login',{
+        email, senha 
+    })
+
+})
+
 //ROTA ESTÁTICA
 router.get('/noticia/titulo-da-noticia',(req:Request,res:Response) =>{
     res.send("Noticia Aparecendo na tela")
